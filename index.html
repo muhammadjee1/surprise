@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow: hidden; height: 100vh;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💕 A Special Question 💕</title>
+    
+    <!-- Google Fonts for Pixel Art Style -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/pixel-window.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Falling Hearts Background -->
+    <div class="hearts-background"></div>
+
+    <!-- Home Button (appears on all screens except first) -->
+    <button class="home-btn" id="home-btn" style="display: none;">
+        <span class="home-icon">🏠</span>
+        <span class="home-text">HOME</span>
+    </button>
+
+    <!-- Dedication Text (appears on all screens) -->
+    <div class="dedication-text">For Hani, From Mu</div>
+    
+    <!-- Music Toggle Button -->
+    <button class="music-toggle-btn" id="music-toggle">
+        <span id="music-icon">🔊</span>
+    </button>
+    
+    <!-- Background Music -->
+    <audio id="background-music" loop preload="auto">
+        <source src="assets/audio/background-music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- SCREEN 0: Intro - Heart Envelope -->
+        <div class="screen active" id="screen-intro">
+            <div class="intro-content">
+                <h1 class="intro-title">♡ Letter For You ♡</h1>
+                <div class="envelope-container">
+                    <img src="assets/characters/Heart-Envelop.png" alt="Love Letter" class="heart-envelope" id="start-envelope">
+                </div>
+            </div>
+        </div>
+        
+        <!-- SCREEN 1 & 2: Initial Question with Yes/No buttons -->
+        <div class="screen" id="screen-question">
+            <div class="pixel-window">
+                <div class="window-header">
+                    <div class="window-title">
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                    </div>
+                    <div class="window-controls">
+                        <span class="control-btn minimize">−</span>
+                        <span class="control-btn maximize">□</span>
+                        <span class="control-btn close">×</span>
+                    </div>
+                </div>
+                <div class="window-content checkered-bg">
+                    <h1 class="question-text">Will you be my Valentine?</h1>
+                    
+                    <!-- Pixel Cat Image -->
+                    <div class="pixel-cat-container">
+                        <img src="assets/characters/Question-Cat.png" 
+                             alt="Pixel Cat" 
+                             class="pixel-cat-image">
+                    </div>
+                    
+                    <div class="button-container">
+                        <button class="pixel-btn yes-btn" id="yes-btn">YES</button>
+                        <button class="pixel-btn no-btn" id="no-btn">NO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: reCAPTCHA Checkbox -->
+        <div class="screen" id="screen-recaptcha">
+            <div class="pixel-window">
+                <div class="window-header">
+                    <div class="window-title">
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                    </div>
+                    <div class="window-controls">
+                        <span class="control-btn minimize">−</span>
+                        <span class="control-btn maximize">□</span>
+                        <span class="control-btn close">×</span>
+                    </div>
+                </div>
+                <div class="window-content centered">
+                    <div class="recaptcha-box">
+                        <div class="recaptcha-top-row">
+                            <!-- Checkbox Container (always visible) -->
+                            <div class="checkbox-container" id="robot-checkbox">
+                                <div class="checkbox" id="checkbox">
+                                    <div class="checkmark"></div>
+                                </div>
+                                <label for="checkbox">I'm not a robot</label>
+                            </div>
+                            <div class="recaptcha-logo">
+                                <div class="recaptcha-icon"></div>
+                                <div class="recaptcha-text">
+                                    <div>reCAPTCHA</div>
+                                    <div class="small-text">Privacy - Terms</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Loading Container (hidden initially, shown after checkbox click below the checkbox) -->
+                        <div class="recaptcha-loading-container" id="recaptcha-loading" style="display: none;">
+                            <p class="loading-text">Loading...</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="recaptcha-progress-fill"></div>
+                            </div>
+                            <p class="loading-subtitle">Confirming your decision 💕</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 3.5: Loading Screen -->
+        <div class="screen" id="screen-loading">
+            <div class="pixel-window">
+                <div class="window-header">
+                    <div class="window-title">
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                    </div>
+                    <div class="window-controls">
+                        <span class="control-btn minimize">−</span>
+                        <span class="control-btn maximize">□</span>
+                        <span class="control-btn close">×</span>
+                    </div>
+                </div>
+                <div class="window-content centered">
+                    <div class="loading-container">
+                        <p class="loading-text">Loading...</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <p class="loading-subtitle">Confirming your decision 💕</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: Image Grid Selection -->
+        <div class="screen" id="screen-grid">
+            <div class="pixel-window">
+                <div class="window-header">
+                    <div class="window-title">
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                    </div>
+                    <div class="window-controls">
+                        <span class="control-btn minimize">−</span>
+                        <span class="control-btn maximize">□</span>
+                        <span class="control-btn close">×</span>
+                    </div>
+                </div>
+                <div class="window-content grid-content">
+                    <div class="grid-header">
+                        <h2>Select all images with</h2>
+                        <h2 class="highlight">your valentine</h2>
+                        <p class="instruction">Click verify once there are none left.</p>
+                    </div>
+                    
+                    <div class="image-grid" id="image-grid">
+                        <!-- Grid will be dynamically populated with randomized images -->
+                    </div>
+
+                    <div class="grid-footer">
+                        <div class="grid-controls">
+                            <button class="icon-btn" title="Refresh">🔄</button>
+                            <button class="icon-btn" title="Audio">🎧</button>
+                            <button class="icon-btn" title="Info">ℹ</button>
+                        </div>
+                        <button class="pixel-btn verify-btn" id="verify-btn">VERIFY</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SCREEN 5: Success Message -->
+        <div class="screen" id="screen-success">
+            <div class="pixel-window">
+                <div class="window-header">
+                    <div class="window-title">
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                        <span class="pixel-separator">·</span>
+                        <span class="pixel-heart">♥</span>
+                    </div>
+                    <div class="window-controls">
+                        <span class="control-btn minimize">−</span>
+                        <span class="control-btn maximize">□</span>
+                        <span class="control-btn close">×</span>
+                    </div>
+                </div>
+                <div class="window-content checkered-bg">
+                    <h1 class="success-title">Yippeeee!</h1>
+                    
+                    <!-- Pixel Cat GIF -->
+                    <div class="pixel-cat-success">
+                        <img src="assets/characters/Together-Cat.png" 
+                             alt="Happy Pixel Cat" 
+                             class="success-cat-image">
+                        <div class="floating-heart">♥</div>
+                    </div>
+
+                    <div class="date-details">
+                        <p class="date-text">Our first Valentine's apart...</p>
+                        <p class="date-text">But maybe not our last together :)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/no-button-evasion.js"></script>
+    <script src="js/image-grid.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
